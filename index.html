@@ -1,0 +1,862 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Magec Villa | Production-Ready Villas</title>
+    <meta
+      name="description"
+      content="Magec Villa rents camera-ready villas for reality TV, commercials, and film crews with concierge-level support."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --sand: #f6f1eb;
+        --ink: #0f2d35;
+        --sea: #0f7c6b;
+        --foam: #e2f1ec;
+        --sun: #ffb347;
+        --coral: #ff725e;
+        --stroke: rgba(15, 45, 53, 0.08);
+        --shadow: 0 24px 60px rgba(15, 45, 53, 0.12);
+        --radius: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          "Space Grotesk",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background: var(--sand);
+        color: var(--ink);
+        line-height: 1.6;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      .bg-accent {
+        position: fixed;
+        inset: -20% auto auto -15%;
+        width: 520px;
+        height: 520px;
+        background:
+          radial-gradient(
+            circle at 30% 30%,
+            rgba(255, 179, 71, 0.35),
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 70% 70%,
+            rgba(15, 124, 107, 0.26),
+            transparent 50%
+          );
+        filter: blur(30px);
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .bg-accent.secondary {
+        inset: auto -10% -25% auto;
+        width: 580px;
+        height: 580px;
+        background:
+          radial-gradient(
+            circle at 60% 40%,
+            rgba(15, 124, 107, 0.3),
+            transparent 55%
+          ),
+          radial-gradient(
+            circle at 40% 60%,
+            rgba(255, 114, 94, 0.18),
+            transparent 60%
+          );
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: blur(12px);
+        background: rgba(246, 241, 235, 0.7);
+        border-bottom: 1px solid var(--stroke);
+      }
+
+      .nav {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 16px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        font-size: 18px;
+        letter-spacing: -0.01em;
+      }
+
+      .logo-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--sea), var(--sun));
+        display: grid;
+        place-items: center;
+        color: #fff;
+        font-weight: 700;
+      }
+
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 18px;
+        border-radius: 14px;
+        background: var(--ink);
+        color: #fff;
+        font-weight: 600;
+        text-decoration: none;
+        border: 1px solid var(--ink);
+        transition:
+          transform 150ms ease,
+          box-shadow 150ms ease,
+          background 150ms ease;
+        box-shadow: 0 14px 34px rgba(15, 45, 53, 0.2);
+        cursor: pointer;
+      }
+
+      .cta.secondary {
+        background: transparent;
+        color: var(--ink);
+        border-color: var(--stroke);
+        box-shadow: none;
+      }
+
+      .cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 40px rgba(15, 45, 53, 0.25);
+      }
+
+      .cta.secondary:hover {
+        background: #fff;
+        box-shadow: var(--shadow);
+      }
+
+      .hero {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 64px 24px 48px;
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 36px;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: rgba(15, 124, 107, 0.1);
+        color: var(--sea);
+        font-weight: 600;
+        font-size: 13px;
+        letter-spacing: 0.02em;
+      }
+
+      h1 {
+        margin: 16px 0 12px;
+        font-size: clamp(36px, 5vw, 56px);
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+      }
+
+      .lead {
+        max-width: 620px;
+        font-size: 18px;
+        color: rgba(15, 45, 53, 0.78);
+        margin-bottom: 28px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .meta {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin-top: 28px;
+      }
+
+      .pill {
+        padding: 10px 14px;
+        border: 1px solid var(--stroke);
+        border-radius: 14px;
+        background: #fff;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .pill strong {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 10px;
+        background: rgba(15, 124, 107, 0.12);
+        color: var(--sea);
+        font-size: 13px;
+      }
+
+      .hero-card {
+        background: linear-gradient(
+          150deg,
+          rgba(15, 124, 107, 0.92),
+          rgba(15, 45, 53, 0.95)
+        );
+        border-radius: 22px;
+        padding: 26px;
+        color: #f2f7f5;
+        box-shadow: var(--shadow);
+        display: grid;
+        gap: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-card::after {
+        content: "";
+        position: absolute;
+        inset: 14px;
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        opacity: 0.7;
+        pointer-events: none;
+      }
+
+      .tag-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .tag {
+        padding: 8px 12px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.1);
+        color: #fdfaf7;
+        font-weight: 600;
+        font-size: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(4px);
+      }
+
+      section {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 32px 24px 12px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .section-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .section-header h2 {
+        margin: 0;
+        font-size: 28px;
+        letter-spacing: -0.01em;
+      }
+
+      .section-header p {
+        max-width: 560px;
+        margin: 0;
+        color: rgba(15, 45, 53, 0.72);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 18px;
+      }
+
+      .card {
+        background: #fff;
+        border-radius: var(--radius);
+        padding: 20px;
+        border: 1px solid var(--stroke);
+        box-shadow: 0 14px 40px rgba(15, 45, 53, 0.08);
+        display: grid;
+        gap: 10px;
+      }
+
+      .card h3 {
+        margin: 0;
+        font-size: 20px;
+      }
+
+      .card p {
+        margin: 0;
+        color: rgba(15, 45, 53, 0.74);
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(15, 124, 107, 0.12);
+        color: var(--sea);
+        font-weight: 600;
+        font-size: 13px;
+      }
+
+      .villa-card {
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .villa-visual {
+        aspect-ratio: 16 / 9;
+        background:
+          linear-gradient(
+            135deg,
+            rgba(255, 179, 71, 0.45),
+            rgba(15, 124, 107, 0.6)
+          ),
+          url("https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1600&q=80")
+            center/cover;
+        position: relative;
+      }
+
+      .villa-visual::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.25));
+      }
+
+      .villa-body {
+        padding: 18px 18px 20px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .chip {
+        padding: 7px 11px;
+        border-radius: 12px;
+        background: rgba(15, 45, 53, 0.06);
+        color: var(--ink);
+        font-weight: 600;
+        font-size: 13px;
+      }
+
+      .process {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 14px;
+        margin-top: 10px;
+      }
+
+      .process-step {
+        padding: 16px 16px;
+        border-radius: 16px;
+        border: 1px dashed rgba(15, 124, 107, 0.3);
+        background: #fff;
+        box-shadow: 0 10px 32px rgba(15, 45, 53, 0.06);
+      }
+
+      .quote {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--ink);
+        margin: 0 0 8px;
+      }
+
+      .quote small {
+        display: block;
+        font-size: 14px;
+        color: rgba(15, 45, 53, 0.7);
+        font-weight: 500;
+        margin-top: 6px;
+      }
+
+      .cta-panel {
+        margin: 28px 0 40px;
+        padding: 24px;
+        border-radius: 18px;
+        background: linear-gradient(
+          120deg,
+          rgba(15, 124, 107, 0.12),
+          rgba(255, 179, 71, 0.16)
+        );
+        border: 1px solid rgba(15, 124, 107, 0.18);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .footer {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 12px 24px 32px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: rgba(15, 45, 53, 0.7);
+      }
+
+      .contact-block {
+        display: grid;
+        gap: 6px;
+        font-weight: 600;
+      }
+
+      a.inline {
+        color: var(--sea);
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      a.inline:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 980px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+        header {
+          position: sticky;
+        }
+        .section-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .nav {
+          padding: 14px 16px;
+        }
+        .hero {
+          padding: 48px 18px 36px;
+        }
+        section {
+          padding: 26px 18px 6px;
+        }
+        .cta {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-accent"></div>
+    <div class="bg-accent secondary"></div>
+    <header>
+      <div class="nav">
+        <div class="logo">
+          <div class="logo-mark">M</div>
+          <span>Magec Villa</span>
+        </div>
+        <div class="hero-actions">
+          <a class="cta secondary" href="#villas">View Villas</a>
+          <a class="cta" href="#contact">Book a walkthrough</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <div class="eyebrow">Production-ready villas • Canary Islands</div>
+          <h1>
+            Camera-ready villas for reality TV, commercials, and film crews.
+          </h1>
+          <p class="lead">
+            Magec Villa curates cinematic villas built for fast-moving
+            production teams. Think Love Island energy: uninterrupted views,
+            controlled privacy, crew parking, and concierge that speaks the
+            language of line producers.
+          </p>
+          <div class="hero-actions">
+            <a class="cta" href="#contact">Check dates & rates</a>
+            <a class="cta secondary" href="#process">See the playbook</a>
+          </div>
+          <div class="meta">
+            <div class="pill">
+              <strong>35+ shoots</strong> Hosted for reality, brand, and music
+              video teams
+            </div>
+            <div class="pill">
+              <strong>24/7 support</strong> Location manager on-call during your
+              stay
+            </div>
+            <div class="pill">
+              <strong>Permits ready</strong> Local partners handle island
+              compliance
+            </div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="badge">Designed for crews</div>
+          <div class="quote">
+            “Magec understood call sheets, lockups, and quiet hours without
+            hand-holding.”<small
+              >Supervising Producer, reality series (ITV format)</small
+            >
+          </div>
+          <div class="tag-grid">
+            <span class="tag">3-phase power</span>
+            <span class="tag">Fiber-backed Wi‑Fi</span>
+            <span class="tag">Generator tie-ins</span>
+            <span class="tag">Grip staging zones</span>
+            <span class="tag">Wardrobe & glam rooms</span>
+            <span class="tag">On-site catering pads</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="villas">
+        <div class="section-header">
+          <h2>Locations built for camera</h2>
+          <p>
+            Sunrise to sunset views, controllable light, and privacy from lenses
+            beyond yours. Choose the villa that matches your storyboard; we’ll
+            prep lookbooks and floor plans on request.
+          </p>
+        </div>
+        <div class="grid">
+          <div class="card villa-card">
+            <div
+              class="villa-visual"
+              style="
+                background-image:
+                  linear-gradient(
+                    135deg,
+                    rgba(255, 179, 71, 0.45),
+                    rgba(15, 124, 107, 0.6)
+                  ),
+                  url(&quot;https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1600&q=80&quot;);
+              "
+            ></div>
+            <div class="villa-body">
+              <div class="badge">Casa Sol • 6BR • Arona</div>
+              <h3>Glass-fronted villa with infinity pool</h3>
+              <p>
+                Tiered decks, uninterrupted ocean horizon, hidden crew access
+                lanes, and blackout-ready bedrooms for talent rest.
+              </p>
+              <div class="chip-row">
+                <span class="chip">Drive-up grip bay</span>
+                <span class="chip">Southwest sunsets</span>
+                <span class="chip">Quiet neighborhood zone</span>
+              </div>
+            </div>
+          </div>
+          <div class="card villa-card">
+            <div
+              class="villa-visual"
+              style="
+                background-image:
+                  linear-gradient(
+                    135deg,
+                    rgba(255, 179, 71, 0.45),
+                    rgba(15, 124, 107, 0.6)
+                  ),
+                  url(&quot;https://images.unsplash.com/photo-1505692062410-b1aa4d1b7a1f?auto=format&fit=crop&w=1600&q=80&quot;);
+              "
+            ></div>
+            <div class="villa-body">
+              <div class="badge">Isla Vista • 5BR • Adeje</div>
+              <h3>Terraced modern with private courtyards</h3>
+              <p>
+                Multiple looks in one footprint: palm courtyards, sunken lounge,
+                and covered dining for night shoots without neighbors.
+              </p>
+              <div class="chip-row">
+                <span class="chip">2 prep kitchens</span>
+                <span class="chip">Glam + wardrobe suites</span>
+                <span class="chip">Dedicated DIT nook</span>
+              </div>
+            </div>
+          </div>
+          <div class="card villa-card">
+            <div
+              class="villa-visual"
+              style="
+                background-image:
+                  linear-gradient(
+                    135deg,
+                    rgba(255, 179, 71, 0.45),
+                    rgba(15, 124, 107, 0.6)
+                  ),
+                  url(&quot;https://images.unsplash.com/photo-1512914890250-353c97c9e7f6?auto=format&fit=crop&w=1600&q=80&quot;);
+              "
+            ></div>
+            <div class="villa-body">
+              <div class="badge">Ocean Terrace • 7BR • La Caleta</div>
+              <h3>Flagship villa for full-season reality</h3>
+              <p>
+                Split wings for crew and cast, control room-ready office, and
+                multiple hero backdrops within 50 meters.
+              </p>
+              <div class="chip-row">
+                <span class="chip">Helicam friendly airspace</span>
+                <span class="chip">20+ parking spots</span>
+                <span class="chip">Sound-buffered suites</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="services">
+        <div class="section-header">
+          <h2>What production teams get</h2>
+          <p>
+            Location support built for showrunners, production managers, and
+            line producers who need zero guesswork when landing on island time.
+          </p>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <div class="badge">Scouting & permits</div>
+            <h3>Paperwork handled before you land</h3>
+            <p>
+              Municipal permits, drone clearances, noise management plans, and
+              insurance docs prepared with local fixers.
+            </p>
+          </div>
+          <div class="card">
+            <div class="badge">Crew logistics</div>
+            <h3>Ops that match the call sheet</h3>
+            <p>
+              Airport meet & greet, crew transport, storage for cases, and
+              secured staging so you can roll without delays.
+            </p>
+          </div>
+          <div class="card">
+            <div class="badge">On-site support</div>
+            <h3>Location manager on comms</h3>
+            <p>
+              Dedicated manager on radio, solving neighbor relations, quiet
+              hours, and fast resets while cameras roll.
+            </p>
+          </div>
+          <div class="card">
+            <div class="badge">Concierge</div>
+            <h3>Talent-ready hospitality</h3>
+            <p>
+              Chef partners, wellness providers, beauty teams, and drivers
+              briefed on confidentiality and call times.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="amenities">
+        <div class="section-header">
+          <h2>Amenities that keep crews moving</h2>
+          <p>
+            Everything you need on location: power, bandwidth, staging, and
+            creature comforts that keep cast and crew sharp.
+          </p>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <h3>Power & tech</h3>
+            <p>
+              3-phase power tie-ins, generator pads, fiber-backed Wi‑Fi, mesh
+              network, and secure DIT room.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Space to work</h3>
+            <p>
+              Grip lanes with direct access, garage staging, wardrobe + glam
+              suites, holding areas, and shaded video village.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Comfort & privacy</h3>
+            <p>
+              Sound-buffered suites, blackout options, spa-level bathrooms, and
+              secluded courtyards for talent reset.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Logistics</h3>
+            <p>
+              20+ parking bays, van-friendly access, waste handling, laundry,
+              and overnight storage for gear cases.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="process">
+        <div class="section-header">
+          <h2>The Magec playbook</h2>
+          <p>
+            We speak production. From scouts to wrap, expect fast responses,
+            clear boundaries, and location managers who anticipate asks.
+          </p>
+        </div>
+        <div class="process">
+          <div class="process-step">
+            <div class="badge">01</div>
+            <h3>Share your dates & format</h3>
+            <p>
+              Tell us your shoot window, headcount, and lookbook. We propose
+              villas with floor plans and availability.
+            </p>
+          </div>
+          <div class="process-step">
+            <div class="badge">02</div>
+            <h3>Lock permits & prep</h3>
+            <p>
+              We coordinate municipal permissions, quiet hours, parking plans,
+              and site rules before your flight.
+            </p>
+          </div>
+          <div class="process-step">
+            <div class="badge">03</div>
+            <h3>Land & roll</h3>
+            <p>
+              Meet your location manager on arrival. Crew staging, catering
+              pads, and comms are ready on day one.
+            </p>
+          </div>
+          <div class="process-step">
+            <div class="badge">04</div>
+            <h3>Support through wrap</h3>
+            <p>
+              Night shoots, resets, neighbor relations, and wrap logistics
+              handled so you stay on schedule.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonials">
+        <div class="section-header">
+          <h2>Producers on Magec Villa</h2>
+          <p>
+            Feedback from teams who film fast and expect white-glove support.
+          </p>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <p class="quote">
+              “We plugged straight into house power and mesh Wi‑Fi. No
+              scrambling for tie-ins or adapters.”<small
+                >Line Producer, UK dating show</small
+              >
+            </p>
+          </div>
+          <div class="card">
+            <p class="quote">
+              “They ran neighbor comms and quiet hours, so we could keep rolling
+              past sunset without friction.”<small
+                >Production Manager, branded series</small
+              >
+            </p>
+          </div>
+          <div class="card">
+            <p class="quote">
+              “Crew parking, catering pads, and glam rooms were pre-staged. We
+              saved a day of setup.”<small>Showrunner, unscripted format</small>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="cta-panel">
+          <div>
+            <div class="badge">Let’s get your dates</div>
+            <h3 style="margin: 8px 0 6px">
+              Tell us your window, headcount, and format.
+            </h3>
+            <p style="margin: 0; color: rgba(15, 45, 53, 0.7)">
+              We’ll reply within one business day with availability, rates, and
+              floor plans tailored to your shoot.
+            </p>
+          </div>
+          <div class="contact-block">
+            <span
+              >Email:
+              <a class="inline" href="mailto:book@magecvilla.com"
+                >book@magecvilla.com</a
+              ></span
+            >
+            <span
+              >Phone/WhatsApp:
+              <a class="inline" href="tel:+34600111222"
+                >+34 600 111 222</a
+              ></span
+            >
+            <span
+              >Decks & scouting:
+              <a class="inline" href="#villas">Request lookbooks</a></span
+            >
+            <div class="hero-actions">
+              <a
+                class="cta"
+                href="mailto:book@magecvilla.com?subject=Magec%20Villa%20booking"
+                >Check dates</a
+              >
+              <a class="cta secondary" href="#process">View playbook</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Magec Villa — Canary Islands</span>
+      <span>Privacy-first hosting for film & TV crews</span>
+    </footer>
+  </body>
+</html>
